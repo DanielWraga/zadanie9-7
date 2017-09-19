@@ -122,7 +122,7 @@ function checkGameWinner() {
     }
 
     if (computer.score === 10) {
-        alert('Wygrał gracz: ' + player.name);
+        alert('Wygrał komputer');
         gameState = "ended";
         setGameElements();
     }
