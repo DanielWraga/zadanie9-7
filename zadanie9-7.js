@@ -32,6 +32,10 @@ function setGameElements() {
       break;
     case 'ended':
         newGameBtn.innerText = 'Jeszcze raz';
+        playerPickElem.innerText = "Player selection";
+        computerPickElem.innerText = "Computer selection";
+        playerResultElem.innerText = "Player Score";
+        computerResultElem.innerText = "Computer Score";
     case 'notStarted':
     default:
         newGameElem.style.display = 'block';
@@ -59,13 +63,6 @@ function newGame() {
 
 }
 
-function playerPick(playerPick) {
-    console.log(playerPick);
-}
-
-var x = Math.random();
-Math.floor(Math.random()*3)
-
 function getComputerPick() {
     var possiblePicks = ['rock', 'paper', 'scissors'];
     return possiblePicks[Math.floor(Math.random()*3)];
@@ -75,13 +72,6 @@ var playerPickElem = document.getElementById('js-playerPick'),
     computerPickElem = document.getElementById('js-computerPick'),
     playerResultElem = document.getElementById('js-playerResult'),
     computerResultElem = document.getElementById('js-computerResult');
-
-function playerPick(playerPick) {
-    var computerPick = getComputerPick();
-
-    playerPickElem.innerHTML = playerPick;
-    computerPickElem.innerHTML = computerPick;
-}
 
 function checkRoundWinner(playerPick, computerPick) {
   playerResultElem.innerHTML = computerResultElem.innerHTML = '';
@@ -106,6 +96,8 @@ function checkRoundWinner(playerPick, computerPick) {
         computer.score++;
     }
 
+    setGamePoints();
+    checkGameWinner();
 }
 
 function playerPick(playerPick) {
@@ -116,12 +108,22 @@ function playerPick(playerPick) {
 
     checkRoundWinner(playerPick, computerPick);
 }
+
 function setGamePoints() {
     playerPointsElem.innerHTML = player.score;
     computerPointsElem.innerHTML = computer.score;
 }
 
 function checkGameWinner() {
-	var gameWinner = (player.name)
+	if (player.score === 10) {
+        alert('Wygrał gracz: ' + player.name);
+        gameState = "ended";
+        setGameElements();
+    }
 
+    if (computer.score === 10) {
+        alert('Wygrał gracz: ' + player.name);
+        gameState = "ended";
+        setGameElements();
+    }
 }
